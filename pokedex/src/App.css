@@ -1,0 +1,75 @@
+.App {
+  text-align: center;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  max-width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+  color: white;
+  gap: 15px;
+  padding: 15px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.pokemon-escolhido-closed{
+  width: 350px;
+  height: 300px;
+  display: none;
+
+  top:0;
+  right: 0;
+  margin: 25vh;
+  
+  border: 1px solid white;
+  position: absolute;
+  background-color: rgba(0,40,240,0.2);
+
+}
+
+
+.pokemon-escolha-open{
+  width: 350px;
+  height: 300px;
+  display: flex;
+
+  top:0;
+  right: 0;
+  margin: 25vh;
+  
+  border: 1px solid white;
+  position: absolute;
+  background-color: rgba(0,40,240,0.2);
+
+}
+.botao-pokemon-escolhido{
+  top: 0;
+  right: 0;
+
+  
+}
