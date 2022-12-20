@@ -1,5 +1,6 @@
 import React, { useEffect, useState }  from "react";
 import axios from 'axios';
+import './style.css'
 
 
 const Card = ( {url} ) => {
@@ -22,12 +23,9 @@ const Card = ( {url} ) => {
                 })
             })
         }
-            if(typeof(url) === "object") {
-                setPokeDados(url);
-                console.log(url)
-                setImg(url.sprites.other.dream_world.front_default) 
-            } else{
-                axios.get(url)
+        
+           
+            axios.get(url)
                 .then(dados => {           
                     verificaArea(dados.data.location_area_encounters)         
                     if(isOk) {                
@@ -36,7 +34,7 @@ const Card = ( {url} ) => {
                     }
                 })
                 .catch(e => console.log("lago"))
-            }
+            
 
 
     }, [isOk, url]);
@@ -50,12 +48,10 @@ const Card = ( {url} ) => {
                             <img  src={img} alt="Imagem do Pokemon"  width="150" height="150"></img>
                         </div>
 
-                        <div key={pokeDados.id}>
+                        <div key={pokeDados.id} className="pokemonDados">
                             <div> Nome: {pokeDados.name} </div>
-                            <div> Id: {pokeDados.id} </div>
-                            <div> Height: {pokeDados.height} </div>
-                            <div> Weigth: {pokeDados.weight} </div>
-                
+                            
+                            
                         </div>
 
                 </div>

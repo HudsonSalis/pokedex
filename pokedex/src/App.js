@@ -2,13 +2,14 @@ import './App.css';
 import React ,{useEffect, useState} from 'react';
 import axios from 'axios';
 import Card from './components/pages/Card';
+import PokemonChosed from './components/Card/pokemonChosed';
 
 function App() {
 
   const [pokemons, setPokemons] = useState([]);
   const [pokemons2, setPokemons2] = useState([]);
   const [search, setSearch] = useState('');
-  const [showOnePokemon, setShowOnePokemon] = useState(false)
+  const [showOnePokemon, setShowOnePokemon] = useState(null)
 
 
   useEffect(() => {
@@ -22,13 +23,17 @@ function App() {
   };
 
   function handleClick() {
+    if( search.length < 2) {
+      return console.log("ntem nada")
+    }
     axios.get(`https://pokeapi.co/api/v2/pokemon/${search}`)
     .then( dados => {
       setPokemons2(dados.data);  
+      setShowOnePokemon(true)
     })
-    .catch(e => console.log(e))
+    .catch(e => console.log("nope"))
 
-    setShowOnePokemon(true)
+    
   }
 
 
@@ -56,10 +61,13 @@ function App() {
           <Card url={ p.url }  key={index}/>
         ))}
 
-        <div className={showOnePokemon ? 'pokemon-escolhido-open' : 'pokemon-escolhido-closed'}>
-          <button className="botao-pokemon-escolhido" type='button'>x</button>
-          {showOnePokemon ? <Card  url={pokemons2} key={pokemons2.id}/> : null}
-        </div>
+        { showOnePokemon && 
+          <div className='pokemon-escolhido-open'>
+            <button className="botao-pokemon-escolhido" type='button' onClick={() => setShowOnePokemon(false) }>x</button>
+            <PokemonChosed  dados={pokemons2} key={pokemons2.id}/> 
+          </div>
+        }
+       
       
 
     
