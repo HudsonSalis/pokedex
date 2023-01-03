@@ -1,0 +1,278 @@
+
+.cards{
+    min-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    background-color: #282A3A;
+
+    
+}
+.onepokemon-charc{
+    border-top: 2px solid orange;
+    border-left: 2px solid orange;
+    padding: 15px;
+}
+
+.container-onepokemon-desc{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 50%;
+    
+    background-color: #2B3A55;
+    padding: 20px;
+    border-radius: 4px;
+    border-top: 2px solid orange;
+    border-left: 2px solid orange;
+    margin-top: 15vh;
+
+    box-shadow: rgba(0, 0, 0, 0.15) 8px 8px 6.6px;
+}
+
+.bloco-onepokemon-image{
+    width: 100%;
+    height: 100%;
+}
+
+.onepokemon-image img{
+    margin-top: 5px;
+    z-index: 99;
+}
+
+.onepokemon-state{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   width: 100%;
+    align-items: center;
+}
+
+.onepokemon-name{
+    font-size: 26px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;  
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.name{
+    margin-right: 20px;
+}
+.weight, .height, .exp {
+    color: orange;
+    margin-left: 10px;
+}
+.ability-container{
+    margin-top: 10px;
+    display: flex; 
+    flex-direction: column;
+}
+
+.ability{
+    text-transform: capitalize;
+    color: orange;
+}
+.onepokemon-desc {
+    font-size: 20px;
+    align-self: center;
+    padding-bottom: 80px;
+}
+.onepokemon-status-container{
+    width: 50%;
+    height: 35vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+   
+    padding: 20px;
+    margin-top: 7vh;
+    margin-bottom: 7vh;
+    padding-right: 35px;
+   
+}
+.status-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
+
+    background-color: #4D4C7D;
+    
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+
+    box-shadow: rgba(0, 0, 0, 0.15) 8px 8px 6.6px;
+    border-top: 2px solid orange;
+    border-left: 2px solid orange;
+}
+
+.status{
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    margin-bottom: 30px;
+}
+
+.label-fraqueza{
+    margin-right: 15px;
+}
+.label-resistencia{
+    margin-right: 15px;
+}
+
+.typeofpokemon{
+    background-color: lightblue;
+    border-radius: 4px;
+    padding: 5px;
+    color: black;
+}
+
+.first{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+.layout-types{
+    text-transform: capitalize;
+    color: black;
+    border-radius: 4px;
+    background-color: #143F6B;
+    padding: 10px;
+    margin-right: 15px;
+    color:white;
+   
+}
+
+.resis{
+    width: 100%;
+}
+.immune{
+  
+}
+.weak{
+    width: 100%;
+}
+
+.evolution-container{
+    width: 50%;
+    margin-top: 15px;
+    padding-right: 35px;
+}
+
+
+.evolutions-pokemons{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    background-image: url("https://assets.pokemon.com/static2/_ui/img/chrome/body_gray_bg.png");
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.15) 8px 8px 6.6px;
+}
+
+
+.footer{
+    width: 100%;
+    height: 15vh;
+    background-color: #100F0F;
+    margin-top: 10vh;
+}
+
+
+.fire{
+    background-color: rgba(250,10,10,0.9);
+
+}
+
+.water{
+    background-color: #143F6B;
+
+}
+
+
+.ice{
+    background-color: #323EDD;
+
+}
+
+
+.poison{
+    background-color: #3F0071;
+
+}
+
+
+.flying{
+    background-color:  rgba(0,150,150);
+
+}
+
+
+.bug{
+    background-color: #379237;
+
+}
+
+
+.electric{
+    background-color: #F7FF56;
+    color: black;
+
+}
+
+.steel{
+    background-color: #444444;
+}
+
+.ground{
+    background-color: #F98404;
+
+}
+
+.fighting{
+    background-color: #FF5151;
+}
+
+
+.grass{
+    background-color: #8CBA51;
+}
+
+.rock{
+    background-color: #443737;
+}
+
+.fairy{
+    background-color: #F77FEE;
+}
+
+
+@-webkit-keyframes list-group {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-moz-keyframes list-group {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@-o-keyframes list-group {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes list-group {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+}

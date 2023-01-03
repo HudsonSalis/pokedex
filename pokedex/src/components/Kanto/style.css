@@ -1,6 +1,6 @@
 
 
-.card{
+.kanto-region{
     width: 300px;
     height: 300px;
 
@@ -17,7 +17,7 @@
 }
 
 .pokemonDados{
-    background-color: red;
+    
     display: flex;
 
 }

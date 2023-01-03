@@ -1,14 +1,14 @@
-import React, { useEffect, useState }  from "react";
-import axios from 'axios';
-import './style.css'
+import React, {useState, useEffect} from "react";  
+import axios from "axios";
+import './style.css';
 
 
-const Card = ( {url} ) => {
 
+const PokemonsFromKanto = ( {url} ) => {
+    
     const [pokeDados, setPokeDados] = useState([]);
     const [img, setImg] = useState();
     const [ isOk, setIsOk] = useState(false);
-    
     
     useEffect(() => {
         
@@ -23,42 +23,35 @@ const Card = ( {url} ) => {
                 })
             })
         }
-        
-           
-            axios.get(url)
-                .then(dados => {           
-                    verificaArea(dados.data.location_area_encounters)         
-                    if(isOk) {                
-                        setPokeDados(dados.data);
-                        setImg(dados.data.sprites.other.dream_world.front_default)    
-                    }
-                })
-                .catch(e => console.log("lago"))
-            
-
-
+                  
+        axios.get(url)
+            .then(dados => {           
+                verificaArea(dados.data.location_area_encounters)         
+                if(isOk) {                
+                    setPokeDados(dados.data);
+                    setImg(dados.data.sprites.other.dream_world.front_default)    
+                }
+            })
+            .catch(e => console.log("lago"))
     }, [isOk, url]);
-   
-    return(
 
+    return (    
         <>
             { isOk &&
-                <div className="card">
+                <div className="kanto-region">
                         <div>
                             <img  src={img} alt="Imagem do Pokemon"  width="150" height="150"></img>
                         </div>
 
                         <div key={pokeDados.id} className="pokemonDados">
-                            <div> Nome: {pokeDados.name} </div>
-                            
-                            
+                            <div>{pokeDados.name} </div>
                         </div>
 
                 </div>
             }
         </>
-        
-    )
+       
+    )   
 }
 
-export default Card;
+export default PokemonsFromKanto;

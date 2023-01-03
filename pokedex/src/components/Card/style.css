@@ -1,139 +1,25 @@
 
-.cards{
-    width: 400px;
-    height: 550px;
 
-    background-image: url("../../assets/images/template-card.png");
-    background-size: cover;
-    background-color: #251B37;
-    border-radius: 40px;
-
+.card{
     display: flex;
     flex-direction: column;
     align-items: center;
+
+}
+
+.card-pokemon{
+    margin-right: 10px;
+}
+
+.ball{
    
-    font-size: 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-  color: white;
-}
-
-.bloco-onepokemon-image{
-    width: 100%;
-    height: 50%;
-}
-
-.onepokemon-image img{
-    margin-top: 45px;
-    z-index: 99;
-}
-
-
-.onepokemon-status{
-    width: 100%;
-    height: 15%;
-
-}
-
-.onepokemon-name{
-    margin-top: 65px;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: white;
-    
-}
-
-.onepokemon-dados{ 
-    width: 100%;
-    height: 30%;
-}
-
-.onepokemon-desc {
-    font-size: 20px;
-    font-family: 'Play', sans-serif;
-}
-.onepokemon-status{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-
-}
-
-.status{
-
-    width: 100%;
-    height: 100%;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-   
-}
-
-
-.type-button {
-    color: yellow;
-    margin-left: 5px;
-    text-transform: uppercase;
-    transition: 0.5s;
-    cursor: pointer;
-    border-radius: 4px;
-    background-color: transparent;
-    border: none;
-    margin-top: 1px;    
-
-    display: flex;
     width: 50px;
-    justify-content: space-between;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #282A3A;
 
-}
-
-.twotypesormore{
     position: absolute;
-    background-color: black;
-    margin-top: 25px;
-    margin-left: 38px;
-    width: 60px;
-    border-radius: 4px;
-    color: yellow;
-
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    cursor: pointer;
-    transition: 2s;
-    text-transform: uppercase;
-
-}
-
-
-.teste{
    
-    appearance: none;
-    
-    background-color: transparent;
-    border: none;
-    padding: 0 1em 0 0;
-    margin: 0;
-    font-family: inherit;
-    font-size: inherit;
-    cursor: inherit;
-    line-height: inherit;
-    color: yellow;
-    text-transform: uppercase;
-    cursor: pointer;
-    
-}
-
-.teste2{
-    background-color: #251B37;
-    border: none;
-    color: yellow;
-    text-transform: uppercase;
+    margin-top: 190px;
+   
 }
