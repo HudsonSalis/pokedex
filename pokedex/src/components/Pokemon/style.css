@@ -1,4 +1,3 @@
-
 .cards{
     min-width: 100%;
     min-height: 100vh;
@@ -9,47 +8,66 @@
     color: white;
     font-family: 'Poppins', sans-serif;
     background-color: #282A3A;
-
-    
-}
-.onepokemon-charc{
-    border-top: 2px solid orange;
-    border-left: 2px solid orange;
-    padding: 15px;
 }
 
 .container-onepokemon-desc{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 50%;
+    align-items: center;
+    width: 70%;
     
     background-color: #2B3A55;
     padding: 20px;
     border-radius: 4px;
-    border-top: 2px solid orange;
-    border-left: 2px solid orange;
     margin-top: 15vh;
 
-    box-shadow: rgba(0, 0, 0, 0.15) 8px 8px 6.6px;
+    border-top: 2px solid orange;
+    border-left: 2px solid orange;
+    box-shadow: rgba(0, 0, 0, 0.15) 14px 13px 10px;
 }
 
 .bloco-onepokemon-image{
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.onepokemon-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.onepokemon-image img{
+    width: 65%;
+    height: 65%;
+    z-index: 99;
 }
 
-.onepokemon-image img{
-    margin-top: 5px;
-    z-index: 99;
+.onepokemon-desc{
+    margin-top: 20px;
+    font-size: 20px;
+    align-self: center;
+    padding-bottom: 80px;
+}
+
+.onepokemon-charc{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    border-radius: 4px;
 }
 
 .onepokemon-state{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-   width: 100%;
+    width: 100%;
     align-items: center;
+
 }
 
 .onepokemon-name{
@@ -80,11 +98,7 @@
     text-transform: capitalize;
     color: orange;
 }
-.onepokemon-desc {
-    font-size: 20px;
-    align-self: center;
-    padding-bottom: 80px;
-}
+
 .onepokemon-status-container{
     width: 50%;
     height: 35vh;
@@ -110,7 +124,7 @@
     width: 100%;
     border-radius: 4px;
 
-    box-shadow: rgba(0, 0, 0, 0.15) 8px 8px 6.6px;
+    box-shadow: rgba(0, 0, 0, 0.15) 13px 14px 10px;
     border-top: 2px solid orange;
     border-left: 2px solid orange;
 }
@@ -149,7 +163,8 @@
     color: black;
     border-radius: 4px;
     background-color: #143F6B;
-    padding: 10px;
+    padding: 12px;
+
     margin-right: 15px;
     color:white;
    
@@ -165,12 +180,24 @@
     width: 100%;
 }
 
-.evolution-container{
+.evolution-container, .stats-container{
     width: 50%;
     margin-top: 15px;
     padding-right: 35px;
 }
 
+
+
+.button-pokemonEvolution{
+    background-color: transparent;
+    cursor: pointer;
+    transition: 1s;
+    border: none;
+}
+
+/* .button-pokemonEvolution:hover{
+    background-color: red;
+} */
 
 .evolutions-pokemons{
     display: flex;
@@ -183,6 +210,24 @@
     box-shadow: rgba(0, 0, 0, 0.15) 8px 8px 6.6px;
 }
 
+.pokeStats{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-transform: capitalize;
+
+    width: 100%;
+    padding: 20px;
+    background-color: #181D31;
+    box-shadow: rgba(0, 0, 0, 0.15) 8px 8px 6.6px;
+
+    border-radius: 4px;
+}
+
+.stats-name{
+    font-size: 14px;
+    width: 20px;
+}
 
 .footer{
     width: 100%;
@@ -192,73 +237,68 @@
 }
 
 
+.normal{
+    background-color: #B5D5C5;
+    color: black;
+}
 .fire{
     background-color: rgba(250,10,10,0.9);
-
 }
-
 .water{
     background-color: #143F6B;
-
 }
-
-
 .ice{
     background-color: #323EDD;
-
 }
-
-
 .poison{
     background-color: #3F0071;
-
 }
-
-
 .flying{
     background-color:  rgba(0,150,150);
-
 }
-
-
 .bug{
     background-color: #379237;
-
 }
-
-
 .electric{
     background-color: #F7FF56;
     color: black;
-
 }
-
 .steel{
     background-color: #444444;
 }
-
 .ground{
     background-color: #F98404;
-
 }
-
 .fighting{
     background-color: #FF5151;
 }
-
-
 .grass{
     background-color: #8CBA51;
 }
-
 .rock{
     background-color: #443737;
 }
-
 .fairy{
     background-color: #F77FEE;
 }
+.psychic{
+    background-color: #350231;
+    color: white;
+}
+.dark{
+    background-color: #100F0F;
+}
 
+.ghost{
+    background-color: #282A3A;
+}
+.dragon{
+    background-color: #A62349;
+}
+
+.doubleWeak{
+    background: linear-gradient(90deg, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 50%)
+}
 
 @-webkit-keyframes list-group {
     0%   { opacity: 0; }
@@ -275,4 +315,14 @@
 @keyframes list-group {
     0%   { opacity: 0; }
     100% { opacity: 1; }
+}
+@keyframes list-group{
+
+}
+
+
+.arrow{
+    position: absolute;
+    margin-left: 25px;
+    background-color: red;
 }

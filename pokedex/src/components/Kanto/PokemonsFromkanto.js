@@ -43,7 +43,7 @@ const PokemonsFromKanto = ( {url} ) => {
                             <img  src={img} alt="Imagem do Pokemon"  width="150" height="150"></img>
                         </div>
 
-                        <div key={pokeDados.id} className="pokemonDados">
+                        <div key={pokeDados.id} className="pokemonDadosKanto">
                             <div>{pokeDados.name} </div>
                         </div>
 

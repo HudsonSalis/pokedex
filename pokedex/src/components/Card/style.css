@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 
 }
 
@@ -11,15 +12,122 @@
     margin-right: 10px;
 }
 
-.ball{
+
+.card-image{
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    transition: 1s;
+
+}
+
+.card-image:hover{
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: 1s;
+}
+
+.pokemonDados{
+    margin-top: 10px;
+    color: orange;
+    display: flex;
+}
+
+
+
+.card-pokemon-name{
+    color: orange;
+    margin-right: 10px;
+    text-transform: capitalize;
+}
+
+.pokemonType{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 70%;
+    align-items: center;
+}
+
+.typeCard{
+    padding: 5px;
+    border-radius: 4px;
+    text-transform: capitalize;
+    margin-top: 10px;
+    
+}
+
+.testw{
    
+    margin-left: 15px;
+}
+
+
+.ball{
     width: 50px;
     height: 50px;
     border-radius: 50%;
     background-color: #282A3A;
-
     position: absolute;
-   
-    margin-top: 190px;
-   
+    bottom: 0;
+  
+    margin-bottom: -58px;
 }
+
+
+.fire{
+    background-color: rgba(250,10,10,0.9);
+    color: white;
+}
+.water{
+    background-color: #143F6B;
+}
+.ice{
+    background-color: #323EDD;
+}
+.poison{
+    background-color: #3F0071;
+}
+.flying{
+    background-color:  rgba(0,150,150);
+}
+.bug{
+    background-color: #379237;
+}
+.electric{
+    background-color: #F7FF56;
+    color: black;
+}
+.steel{
+    background-color: #444444;
+}
+.ground{
+    background-color: #F98404;
+}
+.fighting{
+    background-color: #FF5151;
+}
+.grass{
+    background-color: #8CBA51;
+}
+.rock{
+    background-color: #443737;
+}
+.fairy{
+    background-color: #F77FEE;
+}
+.normal{
+    background-color: #B5D5C5;
+    color: black;
+}
+.psychic{
+    background-color: #350231;
+    color: white;
+}
+.dark{
+    background-color: #100F0F;
+}
+
+.ghost{
+    background-color: #282A3A;
+}
+
