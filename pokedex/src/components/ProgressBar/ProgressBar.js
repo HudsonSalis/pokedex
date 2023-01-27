@@ -1,15 +1,13 @@
 import React from "react";  
 
 
-
-
 const ProgressBar = (props) => {
 
     const {bgColor, completed} = props;
 
     const containerStyles = {
         height: 180,
-        width: 20,
+        width: 40,
         backgroundColor: "#e0e0de",
         display: 'flex'
 

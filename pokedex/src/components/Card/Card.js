@@ -47,7 +47,7 @@ const Card = ( {url} ) => {
                             <div className={ `${typePokemon[1]} typeCard testw` }> {typePokemon[1]}</div> 
                         : null}
                     </div>
-                    <div className="ball"></div>
+                  
             </div>
         </>        
     )

@@ -4,6 +4,9 @@ import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import Card from "../Card/Card";
 import ProgressBar from "../ProgressBar/ProgressBar";
+import TypesOfPokemon from "../Types/Types";
+import Footer from "../Footer/Footer";
+import Header from "../Header/Header";
 
 
 const PokemonChosed = () => {
@@ -33,12 +36,15 @@ const PokemonChosed = () => {
     const [isIneffective, setIsIneffective] = useState([]);
     const [isIneffectiveSecondType, setIsIneffectiveSecondType] = useState([]);
 
+    const [ ability, setAbility] = useState([]);
+    const [category, setCategory] = useState([])
+
 
     //Buscando as url dos tipos de pokemons - fire/eletric/bug...
     useEffect( () => {    
         function imgOfPokemon(){
-            if(state.sprites.other.dream_world.front_default === null){
-                setImgPokemon(state.sprites.other.home.front_default)
+            if(state.sprites.other['official-artwork'].front_default !== null){
+                setImgPokemon(state.sprites.other['official-artwork'].front_default)
             }else{
                 setImgPokemon(state.sprites.other.dream_world.front_default)
             }
@@ -66,12 +72,23 @@ const PokemonChosed = () => {
                 setSecondTypeResistance(data.data.damage_relations.half_damage_from);
                 setIsImmuneSecondType(data.data.damage_relations.no_damage_from);
                 setIsIneffectiveSecondType(data.data.damage_relations.no_damage_to)
-                setHasTwoTypes(true); 
+                
             })
+        }
+
+        function takeAbilities(){
+            state.abilities.map( ability => {
+                axios.get(`${ability.ability.url}`)
+                .then( dados => {
+                    setAbility(hab => [...hab, dados.data.flavor_text_entries[0].flavor_text])
+                })
+            })
+                
         }
 
         takeType(); 
         imgOfPokemon();
+        takeAbilities();
 
         if(state.types[1] !== undefined){
             takeSecondType();
@@ -84,7 +101,9 @@ const PokemonChosed = () => {
         axios.get(`https://pokeapi.co/api/v2/pokemon-species/${state.id}`)
         .then(data => {
             //Pegando frase do Pokemon 
+         
             setPokeFrase(data.data.flavor_text_entries[8].flavor_text);
+            setCategory(data.data.genera[7].genus);
             axios(data.data.evolution_chain.url)
             .then(data2 => {
                 
@@ -118,205 +137,241 @@ const PokemonChosed = () => {
         });
     }
 
+
     return (
         <div className="cards">
-             <div className="container-onepokemon-desc">
-                <div className="bloco-onepokemon-image">
-                    <div className="onepokemon-image">
-                        <img src={imgPokemon} alt="Imagem do Pokemon"  width="250" height="250"></img>
-                    </div>
-                </div>
+            <Header />
+            <div className="main-container">   
 
-                <div className="onepokemon-state" >
-                    <div className="onepokemon-name"> 
+                <div className="name-container"> 
+                    <div className="name-content">
                         <div className="name"> {state.name} </div>
                         <div> Nº {state.id} </div>
-                    </div>
-                    <div className="onepokemon-desc"> "{pokeFrase}" </div>
-                    <div className="onepokemon-charc">
-                        <div>  Experiência Base: <span className="exp">{state.base_experience} </span> </div>
-                        <div>  Altura: <span className="height">{state.height / 10} m </span> </div>
-                        <div>  Peso: <span className="weight"> {state.weight / 10} Kg</span> </div>
-                        <div className="ability-container">  Habilidades: 
-                            {state.abilities.map( hab => <div className="ability" key={hab.ability.name}> {hab.ability.name} </div>)}
+                    </div>                 
+                </div>
+
+                <div className="container-onepokemon-desc">
+
+                    <div className="bloco-onepokemon-image">
+                        <div className="onepokemon-image">
+                            <img src={imgPokemon} alt="Imagem do Pokemon"  width="250" height="250"></img>
                         </div>
                     </div>
-                </div>
-             </div>
 
-            <div className="onepokemon-status-container">
-                <h1> Types </h1>
-                <div className="status-container">
-                    <div className="status">
-                        <span className="label-type">Types: </span>
-                        <span className={`layout-types first ${state.types[0].type.name}`}>{state.types[0].type.name}</span> 
-                        {state.types[1] !== undefined ? (
-                            <span className={`layout-types ${state.types[1].type.name}`}>{state.types[1].type.name}</span> 
-
-                        ) : null}
+                    <div className="onepokemon-state" >
+                        <div className="onepokemon-desc"> {pokeFrase} </div>
+                        <div className="onepokemon-charc">
+                            <div className="typePokemons">
+                                <TypesOfPokemon typeOfPokemon={state.types[0].type.name}/>
+                            
+                                {state.types[1] !== undefined ? (
+                                    <TypesOfPokemon typeOfPokemon={state.types[1].type.name}/>
+                                ) : null}
                         
-                      
-                    </div>
-
-                    <div className="status weak">
-                        <span className="label-fraqueza">Fraqueza: </span> 
-                            <div >
-                                {/* Mostrando e tratando possiveis problemas das fraquezas do 1 tipo*/}
-                                {weaknessPokemon.map(fraquezas => {
-                                    let hasDoubleWeakness = false;
-                                    let hasSameWeakAndResistance = false;
-                                    let hasSameWeakAndImmune = false;
-
-                                    secondTypeResistance.map( secondResistencia => {
-                                        if(secondResistencia.name === fraquezas.name) {
-                                            return hasSameWeakAndResistance = true;
-                                        }
-                                    });
-
-                                    secondTypeWeakness.map( secondFraqueza => {
-                                        if(secondFraqueza.name === fraquezas.name) {
-                                            return hasDoubleWeakness = true;
-                                        }
-                                    });
-
-                                    isImmuneSecondType.map( secondImmune => {
-                                        if( secondImmune.name === fraquezas.name){
-                                            return hasSameWeakAndImmune = true;
-                                        }
-                                    })
-
-                                    if(hasSameWeakAndResistance === true || hasSameWeakAndImmune === true){return null}
-                                    if(hasDoubleWeakness === true){return <span className={`layout-types doubleWeak ${fraquezas.name}`} key={fraquezas.name}> 4x {fraquezas.name}</span>
-                                }
-                                    return <span className={`layout-types ${fraquezas.name}`} key={fraquezas.name}> {fraquezas.name}</span>
-                                })}
-                                
-                                 {/* Mostrando e tratando possiveis problemas das fraquezas do 2 tipo*/}
-                                {secondTypeWeakness.map(fraquezas2 => {
-                                    let ez = false;
-                                    let ez2 = false;
-                                    weaknessPokemon.map(a => { 
-                                        if(a.name===fraquezas2.name){
-                                            return ez = true;
-                                        }
-                                    });
-
-                                    resistancePokemon.map( r => {
-                                        if(r.name === fraquezas2.name)
-                                        return ez2 = true;
-                                    });
-
-                                    if( ez === true || ez2 === true ){return null}
-                                    return <span className={`layout-types ${fraquezas2.name}` } key={fraquezas2.name}> {fraquezas2.name}</span> 
-                                })}                       
                             </div>
+
+                            <div className="pokeDados">
+                                <div>  Experiência Base: <span className="exp">{state.base_experience} </span> </div>
+                                <div>  Altura: <span className="height">{state.height / 10} m </span> </div>
+                                <div>  Peso: <span className="weight"> {state.weight / 10} Kg</span> </div>
+                                <div>  Categoria: <span className="weight"> {category}</span> </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
+
+                <div className="onepokemon-status-container">
                     
-                    <div className="status resis">
-                        <span className="label-resistencia">Resistência: </span> 
+                    <div className="stats-container">
+                        <div className="ability-bloco">
+                            <h1 className="title-status"> Habilidades </h1>
 
-                        <div>
-                            {resistancePokemon.map(resistencia => {
-                                let ez = false;
-                                secondTypeWeakness.map(b => { 
-                                    if(resistencia.name === b.name ){
-                                        return ez = true;
+                            <div className="ability-container"> 
+                                <div className="ability"> 
+                                    {state.abilities[0].ability.name}                                                                       
+                                </div>   
+
+                                <div className="ability-phrase">   
+                                    {ability[0]}                                                                      
+                                </div>     
+                            </div>
+                        </div>
+
+                        <div className="stats-bloco">
+                            <h1 className="title-status"> Status </h1>
+                            <div className="pokeStats">
+                            {state.stats.map( stats => {
+                                let result = stats.stat.name.replace(/[^a-zA-Z ]/g, " ");
+                            
+                                return <div className="stats-single" key={stats.stat.name}>
+                                    <div> 
+                                        <ProgressBar bgColor="#B8405E" completed={stats.base_stat} />
+                                    </div>
+                                    <div className="stats-name"> {result} </div>
+                                </div>                   
+                            })}            
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="all-pokemon-types">
+                        <h1 className="title-types"> Tipos </h1>
+                        <div className="status-container">
+                            <div className="status weak">
+                                <span className="label-fraqueza">Fraqueza </span> 
+                                <div className="fraquezas-container">
+                                    {/* Mostrando e tratando possiveis problemas das fraquezas do 1 tipo*/}
+                                    {weaknessPokemon.map(fraquezas => {
+                                        let hasDoubleWeakness = false;
+                                        let hasSameWeakAndResistance = false;
+                                        let hasSameWeakAndImmune = false;
+
+                                        secondTypeResistance.map( secondResistencia => {
+                                            if(secondResistencia.name === fraquezas.name) {
+                                                return hasSameWeakAndResistance = true;
+                                            }
+                                        });
+
+                                        secondTypeWeakness.map( secondFraqueza => {
+                                            if(secondFraqueza.name === fraquezas.name) {
+                                                return hasDoubleWeakness = true;
+                                            }
+                                        });
+
+                                        isImmuneSecondType.map( secondImmune => {
+                                            if( secondImmune.name === fraquezas.name){
+                                                return hasSameWeakAndImmune = true;
+                                            }
+                                        })
+
+                                        if(hasSameWeakAndResistance === true || hasSameWeakAndImmune === true){return null}
+                                        if(hasDoubleWeakness === true){return <TypesOfPokemon key={fraquezas.name} typeOfPokemon={fraquezas.name} isDoubleWeaker={true}/>
                                     }
-                                });
-                                if(ez === true) {return null}
-                            return <span className={`layout-types ${resistencia.name}`} key={resistencia.name}> {resistencia.name}</span> 
-                            })}
-
-                            {secondTypeResistance.map(resistance2 => {
-                                    let ez = false;
-                                    let ez2 = false;
-
-                                    resistancePokemon.map(a => { 
-                                        if(a.name===resistance2.name){
-                                            return ez = true;
-                                        } 
-                                    });
-
-                                    weaknessPokemon.map( wp => {
-                                        if(resistance2.name === wp.name) {
-                                            return ez2 = true;
-                                        }
-                                    })
+                                        return <TypesOfPokemon key={fraquezas.name} typeOfPokemon={fraquezas.name}/>
+                                    })}
                                     
-                                    if(ez === true || ez2 === true){return null}
-                                    return <span className={`layout-types ${resistance2.name}` }key={resistance2.name}> {resistance2.name}</span> 
-                                })}
-                        </div>
-                    </div>
+                                        {/* Mostrando e tratando possiveis problemas das fraquezas do 2 tipo*/}
+                                    {secondTypeWeakness.map(fraquezas2 => {
+                                        let sameWeak = false;
+                                        let  sameWeakAndResistance = false;
+                                        weaknessPokemon.map(a => { 
+                                            if(a.name===fraquezas2.name){
+                                                return sameWeak = true;
+                                            }
+                                        });
 
-                    <div className="status immune">
-                        <span className="label-resistencia">Imune: </span> 
+                                        resistancePokemon.map( resistance => {
+                                            if(resistance.name === fraquezas2.name)
+                                            return sameWeakAndResistance = true;
+                                        });
 
-                        <div>
-                            {isImmune.length > 0 ? isImmune.map(immune => {
-                            return <span className={`layout-types ${immune.name}` } key={immune.name}> {immune.name}</span> 
-                            }) : null }
+                                        if( sameWeak === true || sameWeakAndResistance === true ){return null}
+                                        return <TypesOfPokemon key={fraquezas2.name} typeOfPokemon={fraquezas2.name}/>
+                                    })}                       
+                                </div>
+                            </div>
+                            
+                            <div className="status resis">
+                                <span className="label-resistencia">Resistência </span> 
 
-                            { isImmuneSecondType.length > 0 ? isImmuneSecondType.map(immune2 => {
-                                    return <span className={`layout-types ${immune2.name}` } key={immune2.name}> {immune2.name}</span> 
-                             }): null}
+                                <div className="container-resistencia">
+                                    {resistancePokemon.map(resistencia => {
+                                        let sameResistanceAndWeaker = false;
+                                        secondTypeWeakness.map(secondWeakness => { 
+                                            if(resistencia.name === secondWeakness.name ){
+                                                return sameResistanceAndWeaker = true;
+                                            }
+                                        });
+                                        if(sameResistanceAndWeaker === true) {return null}
+                                    return <TypesOfPokemon key={resistencia.name} typeOfPokemon={resistencia.name}/>
+                                    })}
 
-                            {isImmune.length < 1 && isImmuneSecondType.length < 1 ? (
-                                <p>None</p>
-                            ): null}
+                                    {secondTypeResistance.map(resistance2 => {
+                                            let sameResistance = false;
+                                            let sameResistanceAndWeak = false;
 
-                        </div>
-                    </div>
+                                            resistancePokemon.map(resistance => { 
+                                                if(resistance.name===resistance2.name){
+                                                    return sameResistance = true;
+                                                } 
+                                            });
 
-                    <div className="status immune ineficaz">
-                        <span className="label-resistencia">Ineficaz contra: </span> 
-                        <div>
-                            {isIneffective.length > 0 ? isIneffective.map(ineffective => {
-                                return <span className={`layout-types ${ineffective.name}` } key={ineffective.name}> {ineffective.name}</span> 
-                            }) : null }
+                                            weaknessPokemon.map( weakness => {
+                                                if(resistance2.name === weakness.name) {
+                                                    return sameResistanceAndWeak = true;
+                                                }
+                                            })
+                                            
+                                            if(sameResistance === true || sameResistanceAndWeak === true){return null}
+                                            return  <TypesOfPokemon key={resistance2.name} typeOfPokemon={resistance2.name}/> 
+                                        })}
+                                        {resistancePokemon.length < 1 && secondTypeResistance.length < 1 ? 
+                                            <span className="none">None</span> : null
 
-                            {isIneffectiveSecondType.length > 0 ? isIneffectiveSecondType.map(ineffective2 => {
-                                return <span className={`layout-types ${ineffective2.name}` } key={ineffective2.name}> {ineffective2.name}</span> 
-                            }) : null }
+                                        }
+                                </div>
+                            </div>
 
-                            {isIneffective.length < 1 && isIneffectiveSecondType.length < 1 ? (
-                                <p>None</p>
-                            ): null}
+                            <div className="status immune">
+                                <span className="label-resistencia">Imune </span> 
+
+                                <div className="container-immune">
+                                    {isImmune.length > 0 ? isImmune.map(immune => {
+                                    return <TypesOfPokemon key={immune.name} typeOfPokemon={immune.name}/> 
+                                    }) : null }
+
+                                    { isImmuneSecondType.length > 0 ? isImmuneSecondType.map(immune2 => {
+                                            return  <TypesOfPokemon key={immune2.name} typeOfPokemon={immune2.name}/> 
+                                    }): null}
+
+                                    {isImmune.length < 1 && isImmuneSecondType.length < 1 ? (
+                                        <span className="none">None</span>
+                                    ): null}
+
+                                </div>
+                            </div>
+
+                            <div className="status immune ineficaz">
+                                <span className="label-resistencia">Ineficaz  </span> 
+                                <div className="container-ineficaz">
+                                    {isIneffective.length > 0 ? isIneffective.map(ineffective => {
+                                        return <TypesOfPokemon key={ineffective.name} typeOfPokemon={ineffective.name}/>
+                                    }) : null }
+
+                                    {isIneffectiveSecondType.length > 0 ? isIneffectiveSecondType.map(ineffective2 => {
+                                        return<TypesOfPokemon key={ineffective2.name} typeOfPokemon={ineffective2.name}/> 
+                                    }) : null }
+
+                                    {isIneffective.length < 1 && isIneffectiveSecondType.length < 1 ? (
+                                        <span className="none">None</span>
+                                    ): null}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div className="stats-container">
-                <h1> Status </h1>
-                <div className="pokeStats">
-                 {state.stats.map( stats => (
-                    <div key={stats.stat.name}>
-                        <div> 
-                            <ProgressBar bgColor="#B8405E" completed={stats.base_stat} />
+
+
+                <div className="evolution-container">
+                    <h1 className="title-evolution"> Evoluções </h1>
+                    <div className="evolution-bloco">            
+                        <div className="evolutions-pokemons">
+                            {hasEvolution ? evolutionStage.slice(0,evolutionStage.length/2).map( pokemonsEvolutionCardName => (
+                                <button 
+                                    type="button" 
+                                    key={pokemonsEvolutionCardName}
+                                    onClick={() => goToPokemonEvolutionStageRoute(pokemonsEvolutionCardName)} 
+                                    className="button-pokemonEvolution"> 
+                                    <Card url={`https://pokeapi.co/api/v2/pokemon/${pokemonsEvolutionCardName}`} key={pokemonsEvolutionCardName} />                
+                                </button>
+                            )) : <span>Esse Pokémon não tem Evolução </span>}
                         </div>
-                        <div className="stats-name">  {stats.stat.name}  </div>
-                    </div>                   
-                  ))}            
+                    </div>
+        
                 </div>
             </div>
-
-            <div className="evolution-container">
-                <h1> Evolution </h1>
-                <div className="evolutions-pokemons">
-                    {hasEvolution ? evolutionStage.slice(0,evolutionStage.length/2).map( pokemonsEvolutionCardName => (
-                        <button 
-                            type="button" 
-                            key={pokemonsEvolutionCardName}
-                            onClick={() => goToPokemonEvolutionStageRoute(pokemonsEvolutionCardName)} 
-                            className="button-pokemonEvolution"> 
-                            <Card url={`https://pokeapi.co/api/v2/pokemon/${pokemonsEvolutionCardName}`} key={pokemonsEvolutionCardName} />                
-                        </button>
-                    )) : <div>Esse Pokémon não tem Evolução </div>}
-                </div>
-            </div>
-
-            <footer className="footer">Footer</footer>
+            <Footer />
         </div>
     )
 }

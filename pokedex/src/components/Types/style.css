@@ -1,0 +1,138 @@
+
+.types-container{
+    
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+
+}
+
+.layout-types {
+
+    text-transform: capitalize;
+    border-radius: 4px;
+    background-color: #143F6B;
+    padding: 7px;
+
+    margin-right: 15px;
+    color:white;
+    width: 100px;
+    height: 25px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+}
+
+
+.hasDoubleWeaker{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-right: 9px;
+    margin-top: 7.5px;
+}
+
+.infoWeakerClose{
+    background-color: #0F0E0E;
+    position: absolute;
+    margin-top: -82px;
+    border-radius: 4px;
+    padding: 5px;
+    display: none;
+    justify-content: center;
+}
+
+.infoWeakerOpen{
+    background-color: #0F0E0E;
+    position: absolute;
+    margin-top: -82px;
+    border-radius: 4px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.infoWeakerClose::after, .infoWeakerOpen::after{
+    content: "";
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    
+    border-top: 20px solid #0F0E0E;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: -15px;
+}
+
+.none{
+
+}
+
+.normal{
+    background-color: #B5D5C5;
+    color: black;
+}
+.fire{
+    background-color: rgba(180,10,10,0.9);
+}
+.water{
+    background-color: #143F6B;
+}
+.ice{
+    background-color: #323EDD;
+}
+.poison{
+    background-color: #3F0071;
+}
+.flying{
+    background-color:  rgba(0,150,150);
+}
+.bug{
+    background-color: #379237;
+}
+.electric{
+    background-color: #F7FF56;
+    color: black;
+}
+.steel{
+    background-color: #272626;
+}
+.ground{
+    background-color: #F98404;
+}
+.fighting{
+    background-color: #FF5151;
+}
+.grass{
+    background-color: #8CBA51;
+}
+.rock{
+    background-color: #443737;
+}
+.fairy{
+    background-color: #F77FEE;
+}
+.psychic{
+    background-color: #350231;
+    color: white;
+}
+.dark{
+    background-color: #100F0F;
+}
+
+.ghost{
+    background-color: #282A3A;
+}
+.dragon{
+    background-color: #A62349;
+}
+
+.doubleWeak{
+    background: linear-gradient(90deg, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.4) 50%)
+}

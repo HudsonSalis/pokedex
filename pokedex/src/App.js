@@ -16,19 +16,22 @@ const App = () => {
 
   return (
     <div className="App">
-      <div>
-        <h1 className=''>
-            ALL POKEMONS FROM KANTO
-        </h1>
-      </div>
+      <div className='te'>
+        <div>
+          <h1 className=''>
+              ALL POKEMONS FROM KANTO
+          </h1>
+        </div>
 
-      <Search />
+        <Search />
+      
+        <header className="App-header">
+          {pokemons.map( (p , index) => (
+            <PokemonsFromKanto url={ p.url }  key={index}/>
+          ))}
+        </header> 
+      </div>
      
-      <header className="App-header">
-        {pokemons.map( (p , index) => (
-          <PokemonsFromKanto url={ p.url }  key={index}/>
-        ))}
-      </header> 
 
     </div>
   );
